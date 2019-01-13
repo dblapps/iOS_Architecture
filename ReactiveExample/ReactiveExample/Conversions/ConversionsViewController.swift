@@ -64,7 +64,7 @@ class ConversionsViewController: UIViewController {
 		self.disposeBag = DisposeBag()
 
 		// Bind typeSelector to view model's type
-		model.type.asDriver()
+		model.type.asDriver(onErrorJustReturn: .weight)
 			.map({$0.rawValue})
 			.drive(self.typeSelector.rx.selectedSegmentIndex)
 			.disposed(by: self.disposeBag)
@@ -74,13 +74,13 @@ class ConversionsViewController: UIViewController {
 			.disposed(by: self.disposeBag)
 
 		// Bind weightView's visibility to view model's type
-		model.type.asDriver()
+		model.type.asDriver(onErrorJustReturn: .weight)
 			.map({$0 != .weight})
 			.drive(self.weightView.rx.isHidden)
 			.disposed(by: self.disposeBag)
 
 		// Bind lengthView's visibility to view model's type
-		model.type.asDriver()
+		model.type.asDriver(onErrorJustReturn: .weight)
 			.map({$0 != .length})
 			.drive(self.lengthView.rx.isHidden)
 			.disposed(by: self.disposeBag)
@@ -101,8 +101,7 @@ class ConversionsViewController: UIViewController {
 				.map({"\($0)"})
 				.drive(textField.rx.text)
 				.disposed(by: self.disposeBag)
-			let text = textField.rx.text
-			text.orEmpty
+			textField.rx.text.orEmpty
 				.distinctUntilChanged()
 				.flatMap(ignoreEmptyString)
 				.map({Double($0) ?? 0.0})

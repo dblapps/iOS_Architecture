@@ -41,7 +41,8 @@ func performDelayedBgBlock(_ delay: TimeInterval, _ block: @escaping () -> Void)
 
 class ConversionsViewModel {
 
-	let type = Variable<ConversionType>(.weight)
+//	let type = Variable<ConversionType>(.weight)
+	let type = PublishSubject<ConversionType>()
 
 	let grams = PublishSubject<Double>()
 	let milligrams = PublishSubject<Double>()
@@ -62,7 +63,7 @@ class ConversionsViewModel {
 
 		// Get initial values from model
 
-		self.type.value = conversionsModel.type
+//		self.type.value = conversionsModel.type
 
 		// Setup subscriptions for updating the conversions model
 
@@ -102,6 +103,8 @@ class ConversionsViewModel {
 				.disposed(by: self.disposeBag)
 		}
 
+		// Get initial values from model
+		self.type.onNext(conversionsModel.type)
 		self.grams.onNext(conversionsModel.weight)
 		self.meters.onNext(conversionsModel.length)
 
