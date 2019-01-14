@@ -85,7 +85,7 @@ class ConversionsViewController: UIViewController {
 			.drive(self.lengthView.rx.isHidden)
 			.disposed(by: self.disposeBag)
 
-		let bindings: [(textField: UITextField, subject: PublishSubject<Double>)] = [
+		let bindings: [(textField: UITextField, subject: Any)] = [
 			(self.gramsTextField, model.grams),
 			(self.milligramsTextField, model.milligrams),
 			(self.ouncesTextField, model.ounces),
@@ -95,19 +95,33 @@ class ConversionsViewController: UIViewController {
 			(self.inchesTextField, model.inches)
 		]
 		bindings.forEach { (textField, subject) in
-			subject
+			if let observable = subject as? Observable<Double> {
+			observable
 				.distinctUntilChanged()
+				.filter{ str -> Bool in !textField.isFirstResponder }
 				.asDriver(onErrorJustReturn: 0.0)
 				.map({"\($0)"})
 				.drive(textField.rx.text)
 				.disposed(by: self.disposeBag)
-			textField.rx.text.orEmpty
-				.distinctUntilChanged()
-				.flatMap(ignoreEmptyString)
-				.map({Double($0) ?? 0.0})
-				.asDriver(onErrorJustReturn: 0.0)
-				.drive(subject)
-				.disposed(by: self.disposeBag)
+			}
+			if let observer = subject as? BehaviorSubject<Double> {
+				textField.rx.text.orEmpty
+					.distinctUntilChanged()
+					.flatMap(ignoreEmptyString)
+					.map({Double($0) ?? 0.0})
+					.asDriver(onErrorJustReturn: 0.0)
+					.drive(observer)
+					.disposed(by: self.disposeBag)
+			}
+			if let observer = subject as? PublishSubject<Double> {
+				textField.rx.text.orEmpty
+					.distinctUntilChanged()
+					.flatMap(ignoreEmptyString)
+					.map({Double($0) ?? 0.0})
+					.asDriver(onErrorJustReturn: 0.0)
+					.drive(observer)
+					.disposed(by: self.disposeBag)
+			}
 		}
 
 	}

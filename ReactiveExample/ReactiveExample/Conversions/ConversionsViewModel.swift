@@ -41,14 +41,13 @@ func performDelayedBgBlock(_ delay: TimeInterval, _ block: @escaping () -> Void)
 
 class ConversionsViewModel {
 
-//	let type = Variable<ConversionType>(.weight)
-	let type = PublishSubject<ConversionType>()
+	private(set) lazy var type = BehaviorSubject<ConversionType>(value: self.conversionsModel.type)
 
-	let grams = PublishSubject<Double>()
+	private(set) lazy var grams = BehaviorSubject<Double>(value: self.conversionsModel.weight)
 	let milligrams = PublishSubject<Double>()
 	let ounces = PublishSubject<Double>()
 
-	let meters = PublishSubject<Double>()
+	private(set) lazy var meters = BehaviorSubject<Double>(value: self.conversionsModel.length)
 	let centimeters = PublishSubject<Double>()
 	let millimeters = PublishSubject<Double>()
 	let inches = PublishSubject<Double>()
@@ -61,9 +60,6 @@ class ConversionsViewModel {
 
 		self.conversionsModel = conversionsModel
 
-		// Get initial values from model
-
-//		self.type.value = conversionsModel.type
 
 		// Setup subscriptions for updating the conversions model
 
@@ -79,9 +75,10 @@ class ConversionsViewModel {
 			self.conversionsModel.length = meters
 		}).disposed(by: self.disposeBag)
 
+		
 		// Setup subscriptions for performing conversions
 
-		let conversions: [(from: PublishSubject<Double>, to: PublishSubject<Double>, factor: Double)] = [
+		let conversions: [(from: BehaviorSubject<Double>, to: PublishSubject<Double>, factor: Double)] = [
 			(self.grams, self.milligrams, 1000.0),
 			(self.grams, self.ounces, 0.035274),
 			(self.meters, self.centimeters, 100.0),
@@ -102,11 +99,6 @@ class ConversionsViewModel {
 				.bind(to: from)
 				.disposed(by: self.disposeBag)
 		}
-
-		// Get initial values from model
-		self.type.onNext(conversionsModel.type)
-		self.grams.onNext(conversionsModel.weight)
-		self.meters.onNext(conversionsModel.length)
 
 	}
 
