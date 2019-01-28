@@ -54,9 +54,6 @@ class ConversionsViewController: UIViewController {
 
 	private func bindModel() {
 
-		let l = UILabel(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
-		l.rx.text
-
 		// Make sure we have a model to bind to
 		guard let model = self.conversionsViewModel else { return }
 
@@ -73,7 +70,7 @@ class ConversionsViewController: UIViewController {
 			.disposed(by: self.disposeBag)
 		self.typeSelector.rx.selectedSegmentIndex
 			.map({ConversionType(rawValue: $0)!})
-			.asObservable().bind(to: model.type)
+			.bind(to: model.type)
 			.disposed(by: self.disposeBag)
 
 		// Bind weightView's visibility to view model's type

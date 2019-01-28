@@ -33,15 +33,15 @@ class ConversionsViewModel {
 
 		// Setup subscriptions for updating the conversions model
 
-		self.type.asObservable().subscribe(onNext: { [unowned self] (type) in
+		self.type.subscribe(onNext: { [unowned self] (type) in
 			self.conversionsModel.type = type
 		}).disposed(by: self.disposeBag)
 
-		self.grams.asObservable().subscribe(onNext: { [unowned self] (grams) in
+		self.grams.subscribe(onNext: { [unowned self] (grams) in
 			self.conversionsModel.weight = grams
 		}).disposed(by: self.disposeBag)
 
-		self.meters.asObservable().subscribe(onNext: { [unowned self] (meters) in
+		self.meters.subscribe(onNext: { [unowned self] (meters) in
 			self.conversionsModel.length = meters
 		}).disposed(by: self.disposeBag)
 
