@@ -9,36 +9,6 @@
 import Foundation
 import RxSwift
 
-func performBlock(_ block: @escaping () -> Void)
-{
-	DispatchQueue.main.async(execute: block);
-}
-
-func performBlockAndWait(_ block: @escaping () -> Void)
-{
-	DispatchQueue.main.sync(execute: block);
-}
-
-func performDelayedBlock(_ delay: TimeInterval, _ block: @escaping () -> Void)
-{
-	DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: block)
-}
-
-func performBgBlock(_ block: @escaping () -> Void)
-{
-	DispatchQueue.global(qos: .background).async(execute: block);
-}
-
-func performBgBlockAndWait(_ block: @escaping () -> Void)
-{
-	DispatchQueue.global(qos: .background).sync(execute: block);
-}
-
-func performDelayedBgBlock(_ delay: TimeInterval, _ block: @escaping () -> Void)
-{
-	DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + delay, execute: block)
-}
-
 class ConversionsViewModel {
 
 	private(set) lazy var type = BehaviorSubject<ConversionType>(value: self.conversionsModel.type)

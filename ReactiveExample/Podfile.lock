@@ -9,6 +9,7 @@ PODS:
   - RxSwift (4.2.0)
 
 DEPENDENCIES:
+  - RxCocoa
   - RxDataSources
   - RxSwift
 
@@ -25,6 +26,6 @@ SPEC CHECKSUMS:
   RxDataSources: cb7c31e652a87ebb919da45f716bbb87b3765f6b
   RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
 
-PODFILE CHECKSUM: cce3db71104f6afb95f2cca413b62194462991cf
+PODFILE CHECKSUM: dffa1b2b33946bb4149d001324c20f5dcfbd4f59
 
 COCOAPODS: 1.5.3

@@ -19,21 +19,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jZv-Bb-Hbe">
-                                <rect key="frame" x="145" y="124" width="85" height="30"/>
+                                <rect key="frame" x="145" y="184" width="85" height="30"/>
                                 <state key="normal" title="Conversions"/>
                                 <connections>
                                     <segue destination="UqC-Zl-3fw" kind="show" id="WXJ-Sx-u8N"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kcp-dk-YNe">
+                                <rect key="frame" x="162.5" y="84" width="50" height="30"/>
+                                <state key="normal" title="Tap Me"/>
+                            </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap Count:  0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Du9-kc-aT0">
+                                <rect key="frame" x="136.5" y="134" width="102.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="jZv-Bb-Hbe" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="60" id="TO1-B6-Dub"/>
+                            <constraint firstItem="Du9-kc-aT0" firstAttribute="centerX" secondItem="Kcp-dk-YNe" secondAttribute="centerX" id="5gK-W5-u88"/>
+                            <constraint firstItem="Du9-kc-aT0" firstAttribute="top" secondItem="Kcp-dk-YNe" secondAttribute="bottom" constant="20" id="BYP-tV-yWy"/>
+                            <constraint firstItem="Kcp-dk-YNe" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Mag-AK-i0w"/>
+                            <constraint firstItem="jZv-Bb-Hbe" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="120" id="TO1-B6-Dub"/>
                             <constraint firstItem="jZv-Bb-Hbe" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eRb-na-5p8"/>
+                            <constraint firstItem="Kcp-dk-YNe" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="rfg-Ty-ZN6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="j9c-Pe-6we"/>
+                    <connections>
+                        <outlet property="tapCountLabel" destination="Du9-kc-aT0" id="8ND-H3-3bo"/>
+                        <outlet property="tapMeButton" destination="Kcp-dk-YNe" id="JRJ-6T-bYA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

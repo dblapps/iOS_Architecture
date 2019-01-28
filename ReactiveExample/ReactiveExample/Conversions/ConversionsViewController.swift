@@ -54,6 +54,9 @@ class ConversionsViewController: UIViewController {
 
 	private func bindModel() {
 
+		let l = UILabel(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+		l.rx.text
+
 		// Make sure we have a model to bind to
 		guard let model = self.conversionsViewModel else { return }
 
